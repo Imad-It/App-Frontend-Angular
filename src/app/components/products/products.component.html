@@ -1,0 +1,60 @@
+<div class="my-4">
+  <button class="btn btn-outline-success" (click)="editProduct()">
+    <i class="fa fa-plus"></i> Add Product
+  </button>
+
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+          <h4 class="modal-title">Delete Product</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          Do you want to delete the Product <span class="text-danger">{{productName}}</span>?
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="deleteProduct()" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!(products$ | async)">
+    <div class="alert alert-primary my-5" role="alert">
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </div>
+    <div class="d-flex justify-content-center text-primary my-5">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="((products$ | async)?.length===0)">
+    <div class="alert alert-success my-5" role="alert">
+      Products not found!
+    </div>
+  </div>
+
+  <div class="card-deck my-5" *ngIf="products$">
+    <div *ngFor="let pr of products$ | async |paginate: { itemsPerPage: 6, currentPage: p }">
+      <app-item [product]="pr" (outProduct)="catchProduct($event)"></app-item>
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+</div>

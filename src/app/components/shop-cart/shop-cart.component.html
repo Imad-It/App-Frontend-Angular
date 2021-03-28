@@ -1,0 +1,34 @@
+<h2 class="text-center text-danger my-5">Choping Cart</h2>
+<div *ngIf="this.shopCartService.cartItems.length===0">
+  <div class="alert alert-primary my-5" role="alert">
+    The Shopping Cart is empty!!!
+  </div>
+</div>
+
+<div *ngIf="!(this.shopCartService.cartItems.length===0)">
+
+  <table class="table table-striped table-bordered border my-5">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th>Price*Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of this.shopCartService.cartItems">
+        <td scope="col">{{cartItem.id}}</td>
+        <td scope="col">{{cartItem.title}}</td>
+        <td scope="col">{{cartItem.price}}€</td>
+        <td scope="col">{{cartItem.qty}}</td>
+        <td>{{(cartItem.price *cartItem.qty)}}€</td>
+      </tr>
+      <tr>
+        <th colspan="4">Total:</th>
+        <th>{{this.shopCartService.total}}€</th>
+      </tr>
+    </tbody>
+  </table>
+</div>

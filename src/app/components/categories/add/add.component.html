@@ -1,0 +1,21 @@
+<div class="my-5">
+  <div class="card">
+    <div class="card-header bg-light">
+      Add Category
+    </div>
+    <div class="card-body">
+      <form [formGroup]="categoryFormGroup">
+        <div class="form-group">
+          <label for="name">Name of Category:</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <span class="text-danger" *ngIf="errorMessage">
+          {{errorMessage}}
+        </span>
+        <div></div>
+        <a class="btn btn-success m-2" (click)="saveCategory()">Save </a>
+        <a class="btn btn-danger m-2" (click)="cancel()">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>

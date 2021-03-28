@@ -1,0 +1,22 @@
+<div class="my-5">
+  <div *ngIf="categoryFormGroup">
+    <div>
+      <div class="card">
+        <div class="card-header bg-light">
+          Update
+        </div>
+        <div class="card-body">
+          <form [formGroup]="categoryFormGroup">
+            <div class="form-group">
+              <label for="name">Name of Category:</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+            <a class="btn btn-primary m-2" (click)="onUpdate()">Update</a>
+            <a class="btn btn-danger m-2" (click)="cancel()">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

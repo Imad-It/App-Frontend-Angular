@@ -1,0 +1,29 @@
+<div class="my-2">
+  <div class="card border border-danger" style="width: 15rem;height: 24rem;">
+    <img class="card-img-top" [src]="product.photo" alt="Card image cap">
+    <!-- [src]="'http://localhost:8080/categories/'+this.catService.currentCatId+'/products/photoProduct/'+product.id" -->
+    <div class="card-body">
+      <h5 class="card-title text-danger font-weight-bold">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="text-success font-weight-bold text-right">{{product.price}}€</p>
+      <p></p>
+
+
+      <div class="d-flex">
+        <form (ngSubmit)="addToCart(product)" #cardForm="ngForm">
+          <div class="d-flex">
+            <button class="btn btn-primary"><i class="fa fa-cart-plus fa-lg"></i></button>
+            <input type="number" min="1" name="qty" [(ngModel)]="product.qty" class="form-control p-1 mr-2">
+          </div>
+        </form>
+
+        <div class="d-flex">
+          <button class="btn btn-warning mr-2"><i class="fa fa-edit fa-lg"></i></button>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#myModal" (click)="emitProduct(product)">
+            <i class="fa fa-trash fa-lg"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

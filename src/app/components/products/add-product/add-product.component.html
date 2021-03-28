@@ -1,0 +1,34 @@
+<div class="my-5">
+  <div class="card">
+    <div class="card-header bg-light">
+      Add Product
+    </div>
+    <div class="card-body">
+      <form [formGroup]="productFormGroup">
+
+        <div class="form-group">
+          <label for="name">Photo:</label>
+          <input type="file" (change)="onSelectedFile($event)" class="form-control" id="name" formControlName="photo">
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+
+        <div class="form-group">
+          <label for="name">Price:</label>
+          <input type="text" class="form-control" id="name" formControlName="price">
+        </div>
+
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" rows="2" formControlName="description"></textarea>
+        </div>
+
+        <a class="btn btn-success m-2" (click)="saveProduct()">Save </a>
+        <!-- <a class="btn btn-danger m-2" (click)="cancel()">Cancel</a> -->
+      </form>
+    </div>
+  </div>
+</div>

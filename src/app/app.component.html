@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand badge badge-danger" href="#">
+
+    <span class="p-3" style="font-size:1.5rem;">Logo</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories <span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="categories/1/products" routerLinkActive="active">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shop-cart" routerLinkActive="active">Shopping Cart</a>
+      </li>
+
+    </ul>
+    <div class="ml-auto">
+      <button type="button" class="btn btn-sm btn-warning">
+        <i class="fa fa-cart-arrow-down fa-2x text-danger"></i>
+        Items: <span class="badge badge-light mr-1">{{this.shopCartService.cartItems.length}}</span>
+        <span class="badge badge-light" *ngIf="this.shopCartService.total!=0">{{this.shopCartService.total}}€</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-md-3">
+    <ul class="list-group border border-danger m-4" *ngIf="(categories && !(categories.length===0))">
+      <li class="list-group-item bg-danger font-weight-bold text-white">CATEGORIES</li>
+      <li class="list-group-item" (click)="select(cat)" *ngFor="let cat of categories"
+        [ngClass]="{'active':(cat.id===this.catService.currentCatId)}">
+        <span [ngStyle]="{'cursor':'pointer'}">{{cat.name}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>
