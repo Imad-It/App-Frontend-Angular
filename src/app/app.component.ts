@@ -16,17 +16,18 @@ export class AppComponent implements OnInit {
   currentCatId: number;
 
   constructor(public catService: CatService, private router: Router, public shopCartService: ShopCartService) {
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.catService.getCategories().subscribe((data) => {
           this.categories = data;
         });
-
       }
     });
   }
-  ngOnInit(): void { }
+
+  ngOnInit(): void {
+
+  }
 
   select(category: Category) {
     this.catService.currentCatId = category.id;

@@ -1,7 +1,20 @@
 <div class="my-4">
-  <button class="btn btn-outline-success" (click)="editProduct()">
-    <i class="fa fa-plus"></i> Add Product
-  </button>
+  <div class="row">
+    <div class="col-sm">
+      <button class="btn btn-outline-success" (click)="editProduct()">
+        <i class="fa fa-plus"></i> Add Product
+      </button>
+    </div>
+
+    <div class="col-sm w-75">
+      <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)" class="form-inline d-flex flex-nowrap">
+        <input name="keyword" ngModel class="form-control mr-sm-2" type="search" placeholder="Search"
+          aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
 
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -47,14 +60,28 @@
   </div>
 
   <div class="card-deck my-5" *ngIf="products$">
-    <div *ngFor="let pr of products$ | async |paginate: { itemsPerPage: 6, currentPage: p }">
+    <div *ngFor="let pr of products$ | async |paginate: { itemsPerPage: this.itemsPerPage, currentPage: p }">
       <app-item [product]="pr" (outProduct)="catchProduct($event)"></app-item>
     </div>
   </div>
 
 
-  <div class="d-flex justify-content-center">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <div class="d-flex justify-content-center p-auto" *ngIf="products$">
+    <div class="form-inline">
+      <label for="formControlSelect" class="m-2">Items/Page</label>
+      <select class="form-control form-control-sm" id="formControlSelect" name="itemsPerPage" [(ngModel)]="itemsPerPage"
+        (change)="onChange($event)">
+        <option value="6">6</option>
+        <option value="9">9</option>
+        <option value="12">12</option>
+        <option value="15">15</option>
+        <option value="18">18</option>
+      </select>
+
+      <div style="margin-top: 15px;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
   </div>
 
 </div>

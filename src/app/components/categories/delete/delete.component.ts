@@ -16,7 +16,9 @@ export class DeleteComponent implements OnInit {
     this.category = <Category>this.router.getCurrentNavigation().extras.state;
   }
 
-  ngOnInit(): void { this.category = history.state; }
+  ngOnInit(): void {
+    //this.category = history.state;
+  }
 
   delete(catId: number) {
     this.catService.deleteCategory(catId).subscribe(() => {

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -60,6 +61,10 @@ export class CatService implements OnInit {
 
     return this.http.request(req);
 
+  }
+
+  searchProduct(keyword: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.host + "products?keyword=" + keyword);
   }
 }
 

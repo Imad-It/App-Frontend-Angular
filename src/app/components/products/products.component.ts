@@ -3,6 +3,7 @@ import { CatService } from './../../services/cat.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit {
   product: Product = null;
   p: number = 1;
   productName: string;
+  itemsPerPage: number = 6;
 
   constructor(private catService: CatService, private router: Router, private route: ActivatedRoute) {
     this.router.events.subscribe(event => {
@@ -28,7 +30,12 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  ngOnInit(): void { console.log('######init') };
+  ngOnInit(): void { };
+
+  onChange(event) {
+    this.itemsPerPage = event.target.value;
+    this.p = 1;
+  }
 
   catchProduct(e) {
     this.productName = e.name;
@@ -41,10 +48,17 @@ export class ProductsComponent implements OnInit {
       () => {
         this.router.navigateByUrl('/categories/' + idCat + '/products?ts=' + Date.now());
       });
+    this.p = 1;
   }
 
   editProduct() {
     this.router.navigateByUrl('/categories/' + this.currentCatId + '/products/addProduct');
+  }
+
+  onSubmit(form: NgForm) {
+    console.log('Your form data : ', form.value.keyword);
+    this.products$ = this.catService.searchProduct(form.value.keyword);
+    this.p = 1;
   }
 
 }

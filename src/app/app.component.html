@@ -23,7 +23,7 @@
 
     </ul>
     <div class="ml-auto">
-      <button type="button" class="btn btn-sm btn-warning">
+      <button type="button" class="btn btn-sm btn-warning" routerLink="/shop-cart">
         <i class="fa fa-cart-arrow-down fa-2x text-danger"></i>
         Items: <span class="badge badge-light mr-1">{{this.shopCartService.cartItems.length}}</span>
         <span class="badge badge-light" *ngIf="this.shopCartService.total!=0">{{this.shopCartService.total}}€</span>
@@ -31,18 +31,20 @@
     </div>
   </div>
 </nav>
+
 <div class="row">
   <div class="col-md-3">
     <ul class="list-group border border-danger m-4" *ngIf="(categories && !(categories.length===0))">
       <li class="list-group-item bg-danger font-weight-bold text-white">CATEGORIES</li>
-      <li class="list-group-item" (click)="select(cat)" *ngFor="let cat of categories"
+      <li class="list-group-item font-weight-bold" (click)="select(cat)" *ngFor="let cat of categories"
         [ngClass]="{'active':(cat.id===this.catService.currentCatId)}">
         <span [ngStyle]="{'cursor':'pointer'}">{{cat.name}}</span>
       </li>
     </ul>
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-9">
     <router-outlet></router-outlet>
   </div>
+
 </div>
