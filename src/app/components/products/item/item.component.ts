@@ -1,9 +1,6 @@
-
+import { Router, ActivatedRoute } from '@angular/router';
 import { ShopCartService } from './../../../services/shop-cart.service';
-import { CartItem } from './../../../models/cartItem';
-
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { CatService } from 'src/app/services/cat.service';
 
@@ -20,10 +17,10 @@ export class ItemComponent implements OnInit {
   @Output() outProduct = new EventEmitter<Product>();
   category: any;
 
-  cartItem: CartItem = null;
-
-
-  constructor(public catService: CatService, private shpoCartService: ShopCartService) { }
+  constructor(public catService: CatService,
+    private shpoCartService: ShopCartService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void { this.product.qty = 1; }
 
@@ -34,27 +31,30 @@ export class ItemComponent implements OnInit {
 
   addToCart(product: Product) {
     if (!this.itemInCart(product)) {
-      this.cartItem = { id: product.id, title: product.name, price: (product.price * product.qty), qty: product.qty };
-      this.shpoCartService.cartItems.push(this.cartItem);
+      this.shpoCartService.products.push(product);
     }
-    let tol: number = 0;
-    for (let item of this.shpoCartService.cartItems) {
-      tol += (item.price * item.qty);
+    let sum: number = 0;
+    for (let item of this.shpoCartService.products) {
+      sum += (item.price * item.qty);
     }
-    this.shpoCartService.total = tol;
+    this.shpoCartService.total = sum;
   }
 
   itemInCart(product: Product): boolean {
-    if (this.shpoCartService.cartItems) {
-      for (let item of this.shpoCartService.cartItems) {
+    if (this.shpoCartService.products) {
+      for (let item of this.shpoCartService.products) {
         if (item.id === product.id) {
           item.qty += product.qty;
-          item.price += (product.price * product.qty);
           return true;
         }
       }
     }
     return false;
+  }
+
+  editProduct(product: Product) {
+    let idCat = this.route.snapshot.paramMap.get("id");
+    this.router.navigateByUrl(`categories/${idCat}/products/editProduct`, { state: product });
   }
 }
 

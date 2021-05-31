@@ -14,6 +14,7 @@ import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
+import { EditProductComponent } from './components/products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddProductComponent } from './components/products/add-product/add-produ
     DeleteComponent,
     ProductsComponent,
     ItemComponent,
-    ShopCartComponent
+    ShopCartComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

@@ -46,6 +46,11 @@ export class CatService implements OnInit {
     return this.http.delete(this.host + idCat + '/products/' + idPro);
   }
 
+  public updateProduct(idCat: any, product: Product): Observable<Product> {
+    console.log('-----', this.host + idCat + '/products/' + product.id, product);
+    console.log('-----', product);
+    return this.http.put<Product>(this.host + idCat + '/products/' + product.id, product);
+  }
 
   saveProduct(file: File, product: Product) {
     let formdata: FormData = new FormData();

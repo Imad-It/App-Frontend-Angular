@@ -25,10 +25,5 @@ export class DeleteComponent implements OnInit {
       this.router.navigateByUrl('/categories');
     });
   }
-
-  cancel() {
-    this.router.navigateByUrl('/categories');
-  }
-
 }
 

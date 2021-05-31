@@ -32,10 +32,10 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void { };
 
-  onChange(event) {
-    this.itemsPerPage = event.target.value;
-    this.p = 1;
-  }
+  // onChange(event) {
+  //   this.itemsPerPage = event.target.value;
+  //   this.p = 1;
+  // }
 
   catchProduct(e) {
     this.productName = e.name;
@@ -59,6 +59,10 @@ export class ProductsComponent implements OnInit {
     console.log('Your form data : ', form.value.keyword);
     this.products$ = this.catService.searchProduct(form.value.keyword);
     this.p = 1;
+  }
+
+  trackById(index: number, product: Product): number {
+    return product.id;
   }
 
 }

@@ -30,6 +30,9 @@ export class CategoriesComponent implements OnInit {
   submit(category: Category) {
     this.router.navigateByUrl('categories/delete', { state: category });
   }
+  trackById(index, category: Category): number {
+    return category.id;
+  }
 
 }
 

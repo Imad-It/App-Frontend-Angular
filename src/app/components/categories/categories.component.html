@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cat of categories | paginate: { itemsPerPage: 5, currentPage: p }">
+        <tr *ngFor="let cat of categories | paginate: { itemsPerPage: 5, currentPage: p }; trackBy:trackById">
           <td class="py-2">{{cat.id}}</td>
           <td class="text-center py-2">{{cat.name}}</td>
           <td colspan="2" class="text-center py-2">

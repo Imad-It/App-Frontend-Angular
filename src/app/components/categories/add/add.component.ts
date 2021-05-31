@@ -34,10 +34,5 @@ export class AddComponent implements OnInit {
       this.errorMessage = "Enter name of Category !"
     }
   }
-
-  cancel() {
-    this.router.navigateByUrl('/categories');
-  }
-
 }
 
